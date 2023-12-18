@@ -6,11 +6,11 @@ export const useUserStore = defineStore('user', () => {
   const token = ref(null)
   const expiresIn = ref(null)
 
-  const access = async () => {
+  const access = async (email, password) => {
     try {
       const res = await api.post(`/auth/login`, {
-        email: "mora@gmail.com",
-        password: "mora123"
+        email,
+        password
       })
 
       token.value = res.data.token
@@ -18,7 +18,40 @@ export const useUserStore = defineStore('user', () => {
 
       sessionStorage.setItem('user', true)
     } catch (error) {
-      console.log(error)
+      if(error.response) {
+        throw error.response.data
+      } else if ( error.request) {
+        console.log(error.request)
+      } else {
+        console.log('Error', error.message)
+      }
+
+      console.log(error.config)
+    }
+  }
+
+  const register = async (email, password, repassword) => {
+    try {
+      const res = await api.post(`/auth/register`, {
+        email,
+        password,
+        repassword
+      })
+
+      token.value = res.data.token
+      expiresIn.value = res.data.expiresIn
+
+      sessionStorage.setItem('user', true)
+    } catch (error) {
+      if(error.response) {
+        throw error.response.data
+      } else if ( error.request) {
+        console.log(error.request)
+      } else {
+        console.log('Error', error.message)
+      }
+
+      console.log(error.config)
     }
   }
 
@@ -62,6 +95,7 @@ export const useUserStore = defineStore('user', () => {
     expiresIn,
     access,
     refreshToken,
-    logout
+    logout,
+    register
   }
 })
