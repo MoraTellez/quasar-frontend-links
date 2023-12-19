@@ -11,6 +11,9 @@
 import AddLink from 'src/components/AddLink.vue';
 import LinkCard from 'src/components/LinkCard.vue';
 import { useLinkStore } from 'src/stores/linkStore';
+import { ref } from 'vue';
+
+const tab = ref('inicio')
 const useLink = useLinkStore()
 
 </script>

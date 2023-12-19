@@ -40,10 +40,10 @@ const mostrarAlerta = (title, message) => {
     <div class="col-12 col-sm-6 col-md-4">
       <h3>Login</h3>
       <q-form @submit.prevent="handleSubmit">
-        <q-input v-model="email" type="email" label="Ingrese email" :rules="[ val => (val && /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val)) || 'Email inválido']">
+        <q-input lazy-rules v-model="email" type="email" label="Ingrese email" :rules="[ val => (val && /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/.test(val)) || 'Email inválido']">
 
         </q-input>
-        <q-input v-model="password" type="password" label="Ingrese contraseña" :rules="[ val => val && val.length >= 6 || 'Contraseña inválida']">
+        <q-input lazy-rules v-model="password" type="password" label="Ingrese contraseña" :rules="[ val => val && val.length >= 6 || 'Contraseña inválida']">
 
         </q-input>
 

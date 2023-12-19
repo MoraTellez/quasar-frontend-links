@@ -7,6 +7,7 @@ const loading = ref(false)
 
 const useLink = useLinkStore()
 const { showNotify } = useNotify()
+const formAdd = ref(null)
 
 const addLink = async () => {
   loading.value = true
@@ -14,6 +15,7 @@ const addLink = async () => {
     await useLink.createLink(link.value)
     showNotify('Link agregado con éxito', 'positive', )
     link.value = ''
+    formAdd.value.resetValidation()
   } catch (error) {
     showNotify('Error al agregar el link', 'negative', )
   } finally {
@@ -23,7 +25,7 @@ const addLink = async () => {
 </script>
 
 <template>
-<q-form @submit.prevent="addLink">
+<q-form @submit.prevent="addLink" ref="formAdd">
   <q-input
     v-model="link"
     label="Ingrese link aquí"
@@ -31,6 +33,7 @@ const addLink = async () => {
     :rules="[
       val => val && val.trim() !== '' && /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/.test(val) || 'Ingresa una dirección válida'
     ]"
+    lazy-rules
   >
   </q-input>
   <q-btn

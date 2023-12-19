@@ -5,15 +5,19 @@
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          Quasar App
+          Acortador de link
         </q-toolbar-title>
 
-        <q-btn color="green" to="/login" v-if="!userStore.token">Login</q-btn>
+        <q-btn color="teal" to="/login" v-if="!userStore.token">Login</q-btn>
         <q-btn class="q-ml-sm" color="green" to="/register" v-if="!userStore.token">Register</q-btn>
-        <q-btn class="q-mr-sm" color="purple" to="/" v-if="userStore.token">Inicio</q-btn>
-        <q-btn class="q-mr-sm" color="teal" to="/protected" v-if="userStore.token">Protected</q-btn>
+        <!--
+           <q-btn class="q-mr-sm" color="purple" to="/" v-if="userStore.token">Inicio</q-btn>
+        -->
         <q-btn color="red" @click="logout" v-if="userStore.token">Logout</q-btn>
       </q-toolbar>
+      <q-tabs v-model="tab">
+          <q-tab name="inicio" label="Inicio"  to="/" v-if="userStore.token" />
+        </q-tabs>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
@@ -86,6 +90,9 @@ const essentialLinks = [
   }
 ]
 const leftDrawerOpen = ref(false)
+
+const tab = ref('inicio')
+
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value

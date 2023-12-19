@@ -1,6 +1,5 @@
 <script setup>
 import { useLinkStore } from 'src/stores/linkStore'
-import { defineProps } from 'vue';
 import { useQuasar } from 'quasar';
 import { useNotify } from 'src/composables/notifyHook';
 
