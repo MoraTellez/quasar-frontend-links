@@ -1,8 +1,8 @@
 <template>
   <q-page padding>
-    <AddLink />
+    <AddLink class="q-mb-lg" />
     <template v-for="link of  useLink.links" :key="link._id">
-      <LinkCard/>
+      <LinkCard :link="link" />
     </template>
   </q-page>
 </template>
